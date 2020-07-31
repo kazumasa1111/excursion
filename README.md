@@ -1,24 +1,51 @@
 # README
+# excursion DB設計
+## usersテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null:false|
+|email|string|null: false|
+|password|string|null:false|
+|nickname|string|null: false|
+|image|string||
+|birthday|date|null:false|
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Association
+- has_many :schedules
+- has_many :schedules_groups
 
-Things you may want to cover:
+## schedulesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|date|date|null:false|
+|address|string|null: false|
+|lodging|string|null:false|
+|bookmark|string|null: false|
+|budget|integer|null: false|
 
-* Ruby version
+### Association
+- belongs_to :user
+- belongs_to :schedule_group
 
-* System dependencies
+## schedules_groupsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null:false|
+|schedules_id|integer|null: false|
 
-* Configuration
 
-* Database creation
+### Association
+- belongs_to :user
+- belongs_to :schedule
 
-* Database initialization
+## commentsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|text|string|null:false|
+|image|string|
+|created_at|datetime|null:false|
+|update_at|datetime|null:false|
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :schedule_group
